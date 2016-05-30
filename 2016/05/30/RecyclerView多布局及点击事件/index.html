@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="android," />
 
 
 
@@ -84,15 +84,24 @@
 
 
 
-<meta name="description" content="本无意与众不同，怎奈何品味出众">
-<meta property="og:type" content="website">
-<meta property="og:title" content="胡闹的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="RecyclerView真的是太强大太强大的，没听过这个view 的可以自行google一下；本文将介绍RecyclerView的多布局；
+##多布局的实现
+布局多布局是指一个不同的item用不同的layout显示。我们的主页面里面就放RecyclerView1234&amp;lt;android.support.v7.widget.RecyclerView      android:id=&amp;quot;@">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="http://yoursite.com/2016/05/30/RecyclerView多布局及点击事件/index.html">
 <meta property="og:site_name" content="胡闹的博客">
-<meta property="og:description" content="本无意与众不同，怎奈何品味出众">
+<meta property="og:description" content="RecyclerView真的是太强大太强大的，没听过这个view 的可以自行google一下；本文将介绍RecyclerView的多布局；
+##多布局的实现
+布局多布局是指一个不同的item用不同的layout显示。我们的主页面里面就放RecyclerView1234&amp;lt;android.support.v7.widget.RecyclerView      android:id=&amp;quot;@">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-b5832f23a151b171.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-05-30T02:10:59.150Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="胡闹的博客">
-<meta name="twitter:description" content="本无意与众不同，怎奈何品味出众">
+<meta name="twitter:title" content="Hello World">
+<meta name="twitter:description" content="RecyclerView真的是太强大太强大的，没听过这个view 的可以自行google一下；本文将介绍RecyclerView的多布局；
+##多布局的实现
+布局多布局是指一个不同的item用不同的layout显示。我们的主页面里面就放RecyclerView1234&amp;lt;android.support.v7.widget.RecyclerView      android:id=&amp;quot;@">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2029141-b5832f23a151b171.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -110,7 +119,7 @@
   };
 </script>
 
-  <title> 胡闹的博客 </title>
+  <title> Hello World | 胡闹的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -140,9 +149,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,9 +246,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -261,10 +268,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/05/30/RecyclerView多布局及点击事件/" itemprop="url">
-                  Hello World
-                </a>
+                Hello World
               
             
           </h1>
@@ -339,9 +343,7 @@
       
 
       
-        
-          
-            <p>RecyclerView真的是太强大太强大的，没听过这个view 的可以自行google一下；<br>本文将介绍RecyclerView的多布局；</p>
+        <p>RecyclerView真的是太强大太强大的，没听过这个view 的可以自行google一下；<br>本文将介绍RecyclerView的多布局；</p>
 <p>##多布局的实现</p>
 <h4 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h4><p>多布局是指一个不同的item用不同的layout显示。<br>我们的主页面里面就放RecyclerView<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.v7.widget.RecyclerView</span><br><span class="line">      android:id=&quot;@+id/recylerview&quot;</span><br><span class="line">      android:layout_width=&quot;match_parent&quot;</span><br><span class="line">      android:layout_height=&quot;match_parent&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
 <p>既然是要实现多布局，那么我们就写两个布局吧，一个<code>item_normal</code>,值包含一个 <code>TextView</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;?listPreferredItemHeight&quot;</span><br><span class="line">    android:background=&quot;?selectableItemBackground&quot;</span><br><span class="line">    android:clickable=&quot;true&quot;</span><br><span class="line">    android:gravity=&quot;center&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:id=&quot;@+id/root_view&quot;</span><br><span class="line">    android:padding=&quot;10dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/tv_name&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:textSize=&quot;18sp&quot; /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure></p>
@@ -358,168 +360,58 @@
 <p>最后只要在Adapter上设置我们的监听器就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">adapter.setClickListener(new MyAdapter.OnItemClickListener() &#123;</span><br><span class="line">           boolean flag = false;</span><br><span class="line">           @Override</span><br><span class="line">           public void onClick(View view, int position) &#123;</span><br><span class="line">               TextView tvName = (TextView) view.findViewById(R.id.tv_name);</span><br><span class="line">               String name = flag ? &quot;hunao&quot; : &quot;china&quot;;</span><br><span class="line">               tvName.setText(name + position);</span><br><span class="line">               flag = !flag;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure></p>
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><h6 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package com.hugo.recylerviewdemo;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.support.v7.widget.LinearLayoutManager;</span><br><span class="line">import android.support.v7.widget.RecyclerView;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    private RecyclerView recylerView;</span><br><span class="line">    private List&lt;String&gt; datas;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        initData();</span><br><span class="line">        initView();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initData() &#123;</span><br><span class="line">        datas = new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; 20; i++) &#123;</span><br><span class="line">            datas.add(&quot;hunao &quot; + i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initView() &#123;</span><br><span class="line">        recylerView = (RecyclerView) findViewById(R.id.recylerview);</span><br><span class="line">        LinearLayoutManager layoutManager = new LinearLayoutManager(this);</span><br><span class="line">        recylerView.setLayoutManager(layoutManager);</span><br><span class="line">        MyAdapter adapter = new MyAdapter(datas);</span><br><span class="line">        recylerView.setAdapter(adapter);</span><br><span class="line">        adapter.setClickListener(new MyAdapter.OnItemClickListener() &#123;</span><br><span class="line">            boolean flag = false;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View view, int position) &#123;</span><br><span class="line">                TextView tvName = (TextView) view.findViewById(R.id.tv_name);</span><br><span class="line">                String name = flag ? &quot;hunao&quot; : &quot;china&quot;;</span><br><span class="line">                tvName.setText(name + position);</span><br><span class="line">                flag = !flag;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h6 id="MyAdapter"><a href="#MyAdapter" class="headerlink" title="MyAdapter"></a>MyAdapter</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">package com.hugo.recylerviewdemo;</span><br><span class="line"></span><br><span class="line">import android.support.v7.widget.RecyclerView;</span><br><span class="line">import android.view.LayoutInflater;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.ViewGroup;</span><br><span class="line">import android.widget.LinearLayout;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @auther Hugo</span><br><span class="line"> * Created on 2016/5/12 20:29.</span><br><span class="line"> */</span><br><span class="line">public class MyAdapter extends RecyclerView.Adapter&lt;RecyclerView.ViewHolder&gt; &#123;</span><br><span class="line"></span><br><span class="line">    private static final int NORMAL_TYPE = 0;</span><br><span class="line">    private static final int CHECK_TYPE = 1;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getItemViewType(int position) &#123;</span><br><span class="line">        if (position % 4 == 0) &#123;</span><br><span class="line">            return CHECK_TYPE;</span><br><span class="line">        &#125;</span><br><span class="line">        return NORMAL_TYPE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private List&lt;String&gt; datas;</span><br><span class="line"></span><br><span class="line">    public MyAdapter(List&lt;String&gt; datas) &#123;</span><br><span class="line">        this.datas = datas;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private OnItemClickListener clickListener;</span><br><span class="line"></span><br><span class="line">    public void setClickListener(OnItemClickListener clickListener) &#123;</span><br><span class="line">        this.clickListener = clickListener;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static interface OnItemClickListener &#123;</span><br><span class="line">        void onClick(View view, int position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) &#123;</span><br><span class="line">        if (viewType == NORMAL_TYPE) &#123;</span><br><span class="line">            return new NormalHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_normal, parent, false));</span><br><span class="line">        &#125; else</span><br><span class="line">            return new CheckHoldr(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_check, parent, false));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) &#123;</span><br><span class="line">        if (holder instanceof NormalHolder) &#123;</span><br><span class="line">            ((NormalHolder) holder).tv_name.setText(datas.get(position));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            ((CheckHoldr) holder).tv_name.setText(datas.get(position));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getItemCount() &#123;</span><br><span class="line">        return datas.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class NormalHolder extends RecyclerView.ViewHolder implements View.OnClickListener &#123;</span><br><span class="line"></span><br><span class="line">        TextView tv_name;</span><br><span class="line">        LinearLayout rootView;</span><br><span class="line"></span><br><span class="line">        public NormalHolder(View itemView) &#123;</span><br><span class="line">            super(itemView);</span><br><span class="line">            tv_name = (TextView) itemView.findViewById(R.id.tv_name);</span><br><span class="line">            rootView = (LinearLayout) itemView.findViewById(R.id.root_view);</span><br><span class="line">            rootView.setOnClickListener(this);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View v) &#123;</span><br><span class="line">            if (clickListener != null) &#123;</span><br><span class="line">                clickListener.onClick(itemView, getAdapterPosition());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class CheckHoldr extends NormalHolder &#123;</span><br><span class="line">        public CheckHoldr(View itemView) &#123;</span><br><span class="line">            super(itemView);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/29/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-29T11:22:23+08:00" content="2016-05-29">
-              2016-05-29
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/29/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/29/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/android/" rel="tag">#android</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/29/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/29/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -527,6 +419,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/30/RecyclerView多布局及点击事件/"
+           data-title="Hello World" data-url="http://yoursite.com/2016/05/30/RecyclerView多布局及点击事件/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -546,8 +446,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/header.jpg"
@@ -597,6 +506,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#布局"><span class="nav-number">1.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adapter"><span class="nav-number">2.</span> <span class="nav-text">Adapter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Item点击事件"><span class="nav-number">3.</span> <span class="nav-text">Item点击事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number"></span> <span class="nav-text">完整代码</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Activity"><span class="nav-number">0.0.1.</span> <span class="nav-text">Activity</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MyAdapter"><span class="nav-number">0.0.2.</span> <span class="nav-text">MyAdapter</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -700,6 +620,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
