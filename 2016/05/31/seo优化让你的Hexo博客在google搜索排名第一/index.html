@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://i.imgur.com/VWnQNUs.png">
 <meta property="og:image" content="http://i.imgur.com/NdZ6zFx.png">
 <meta property="og:image" content="http://i.imgur.com/etmgeUL.png">
-<meta property="og:updated_time" content="2016-05-31T13:50:49.670Z">
+<meta property="og:updated_time" content="2016-05-31T13:59:30.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Seo优化让你的Hexo博客在google搜索排名第一">
 <meta name="twitter:description" content="刚刚建买了域名建了博客，发现在google，百度毛都搜不到，真是悲伤，后来才知道原来是要seo的，所以看了一些文章，然后自己也摸索了一下，终于在让自己的博客在google搜索排名第一了!!!上图！哈哈，顿时觉得自己好厉害耶!下面给大家分享一些我的经验。">
@@ -342,25 +342,25 @@
 <p>这时候你的首页会更符合<code>网站名称 - 网站描述</code>这习惯。<br>进阶，做了seo优化，把关键词也显示在title标题里，可改成</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block title %&#125; &#123;&#123; theme.keywords &#125;&#125; - &#123;&#123; config.title &#125;&#125;&#123;&#123; theme.description &#125;&#125; &#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>：别堆砌关键字，整个标题一般不超过80个字符，可以通过chinaz的seo综合查询检查。</p>
-<h4 id="给你的博客添加sitemap站点地图"><a href="#给你的博客添加sitemap站点地图" class="headerlink" title="给你的博客添加sitemap站点地图"></a>给你的博客添加sitemap站点地图</h4><ol>
+<h4 id="给你的博客添加sitemap站点地图"><a href="#给你的博客添加sitemap站点地图" class="headerlink" title="给你的博客添加sitemap站点地图"></a>给你的博客添加sitemap站点地图</h4><ul>
 <li><p>安装sitemap站点地图自动生成插件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在<code>主题配置文件</code>中添加一下配置 ，这里有的文章说的是在<code>站点配置文章</code>中添加，这个应该问题不大。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br><span class="line">  </span><br><span class="line">baidusitemap:</span><br><span class="line">  path: baidusitemap.xml</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p><strong>注意</strong>：上面的格式一定要正确，一定要有缩进，不然会出错，我想信很多小伙伴因为没有缩进而不能编译的。<br>然后在<code>主题配置文件</code>中修改<code>url</code>为你的域名，例如我的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url: http://hunao.info</span><br></pre></td></tr></table></figure></p>
 <p><code>NexT</code>主题默认的是<code>http://yoursite.com</code><br>配置好后，<code>hexo g</code> 就能在<code>your-hexo-site\public</code> 中生成<code>sitemap.xml</code> 和 <code>baidusitemap.xml</code>了;其中第一个是一会要提交给google的，后面那个看名字当然就是提交给Baidu的了；</p>
-<ol>
+<ul>
 <li>在<code>your-hexo-site\source</code>中新建文件<code>robots.txt</code>,内容可以参照我的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Allow: /</span><br><span class="line">Allow: /archives/</span><br><span class="line">Allow: /categories/</span><br><span class="line">Allow: /tags/</span><br><span class="line"></span><br><span class="line">Disallow: /vendors/</span><br><span class="line">Disallow: /js/</span><br><span class="line">Disallow: /css/</span><br><span class="line">Disallow: /fonts/</span><br><span class="line">Disallow: /vendors/</span><br><span class="line">Disallow: /fancybox/</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p>其中Allow后面的就是你的menu；</p>
-<ol>
+<ul>
 <li>在<code>robots.txt</code>中添加下面的代码  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Sitemap: http://www.hunao.info/sitemap.xml</span><br><span class="line">Sitemap: http://www.hunao.info/baidusitemap.xml</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+</ul>
 <p><strong>请自行将<code>www.hunao.info</code>改成自己的域名</strong><br>然后<code>hexo d -g</code>提交一下</p>
 <h4 id="注册Google-Search-Console"><a href="#注册Google-Search-Console" class="headerlink" title="注册Google Search Console"></a>注册Google Search Console</h4><p>链接：<a href="https://www.google.com/webmasters/" target="_blank" rel="external">https://www.google.com/webmasters/</a><br>根据提示注册好之后，添加你的博客域名。<br><img src="http://i.imgur.com/LkWvicZ.png" alt="google console"><br>如图，我添加了两个，你可以视情况而定。然后点击你的域名进入:</p>
 <p><img src="http://i.imgur.com/7ehsLCS.png" alt="管理界面"></p>
@@ -538,7 +538,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
