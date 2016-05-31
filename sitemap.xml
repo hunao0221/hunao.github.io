@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://hunao.info/categories/index.html</loc>
+    
+    <lastmod>2016-05-31T07:39:53.318Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://hunao.info/2016/05/30/%E6%95%99%E4%BD%A030%E5%9D%97%E8%BD%BB%E6%9D%BE%E6%90%9E%E5%AE%9A%E4%B8%80%E5%B9%B4%E7%9A%84vps%E5%92%8Cshadowsocks/</loc>
     
     <lastmod>2016-05-31T05:07:17.170Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://hunao.info/2016/05/29/hello-world/</loc>
     
     <lastmod>2016-05-30T02:03:41.537Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://hunao.info/categories/index.html</loc>
-    
-    <lastmod>2016-05-29T15:19:29.164Z</lastmod>
     
   </url>
   
