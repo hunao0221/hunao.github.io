@@ -1,0 +1,879 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android,rxjava,retrofit,知乎日报," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="这几天抽时间学习了一下火到不行的两个两个框架RxJava和Retrofit，两个框架一结合，牛逼的不要不要的，真的火得有理由啊；于是乎，山寨了一个阉割版的知乎日报，只实现了知乎日报首页。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava+Retrofit版知乎日报首页以及遇到的一些坑">
+<meta property="og:url" content="http://hunao.info/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/index.html">
+<meta property="og:site_name" content="一个人胡闹的日子">
+<meta property="og:description" content="这几天抽时间学习了一下火到不行的两个两个框架RxJava和Retrofit，两个框架一结合，牛逼的不要不要的，真的火得有理由啊；于是乎，山寨了一个阉割版的知乎日报，只实现了知乎日报首页。">
+<meta property="og:image" content="http://i.imgur.com/TUYfZVI.png">
+<meta property="og:image" content="http://i.imgur.com/qH9ixgS.png">
+<meta property="og:image" content="http://i.imgur.com/fF9aChT.png">
+<meta property="og:image" content="http://i.imgur.com/R1eGoAq.png">
+<meta property="og:updated_time" content="2016-06-06T14:38:45.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava+Retrofit版知乎日报首页以及遇到的一些坑">
+<meta name="twitter:description" content="这几天抽时间学习了一下火到不行的两个两个框架RxJava和Retrofit，两个框架一结合，牛逼的不要不要的，真的火得有理由啊；于是乎，山寨了一个阉割版的知乎日报，只实现了知乎日报首页。">
+<meta name="twitter:image" content="http://i.imgur.com/TUYfZVI.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6290114238165812000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> RxJava+Retrofit版知乎日报首页以及遇到的一些坑 | 一个人胡闹的日子 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-78475281-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">一个人胡闹的日子</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">湖泊无水,门前有圩</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RxJava+Retrofit版知乎日报首页以及遇到的一些坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T20:33:24+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/" class="leancloud_visitors" data-flag-title="RxJava+Retrofit版知乎日报首页以及遇到的一些坑">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这几天抽时间学习了一下火到不行的两个两个框架<code>RxJava</code>和<code>Retrofit</code>，两个框架一结合，牛逼的不要不要的，真的火得有理由啊；<br>于是乎，山寨了一个阉割版的知乎日报，只实现了知乎日报首页。<br><img src="http://i.imgur.com/TUYfZVI.png" alt="截图"><br><a id="more"></a></p>
+<h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><p>知乎日报的<code>API</code>没什么好说的，可以看看下面的链接：</p>
+<p><a href="https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90" target="_blank" rel="external">知乎日报 API 分析</a></p>
+<h4 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h4><blockquote>
+<p>  compile ‘io.reactivex:rxjava:1.1.5’<br>    compile ‘io.reactivex:rxandroid:1.2.0’<br>    compile ‘com.squareup.retrofit2:retrofit:2.0.0-beta4’<br>    compile ‘com.squareup.retrofit2:converter-gson:2.0.0-beta4’<br>    compile ‘com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4’<br>    compile ‘com.google.code.gson:gson:2.6.2’<br>    compile ‘com.github.bumptech.glide:glide:3.7.0’<br>    compile ‘com.jakewharton:butterknife:7.0.1’</p>
+</blockquote>
+<h4 id="Retrofit"><a href="#Retrofit" class="headerlink" title="Retrofit"></a>Retrofit</h4><p>Retrofit使用注解+java接口来定义后台服务API接口，定义一个接口，和三个Get请求；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ZhihuApi</span> </span>&#123;</span><br><span class="line">    <span class="comment">//最新消息</span></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"api/4/news/latest"</span>)</span><br><span class="line">    <span class="function">Observable&lt;LatestStory&gt; <span class="title">getLatest</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//日报内容</span></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"api/4/news/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function">Observable&lt;Content&gt; <span class="title">getContent</span><span class="params">(@Path(<span class="string">"id"</span>)</span> String id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//过往消息，date是一个日期，如:20160606</span></span><br><span class="line">    <span class="meta">@GET</span>(<span class="string">"api/4/news/before/&#123;date&#125;"</span>)</span><br><span class="line">    <span class="function">Observable&lt;BeforeStroy&gt; <span class="title">getBefore</span><span class="params">(@Path(<span class="string">"date"</span>)</span> String date)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，返回值类型已经不再是<code>Call&lt;T&gt;</code>了，而是<code>Observable</code>,因为使用了<code>Rxjava</code>，只要初始化<code>Retrofit</code>的时候，设置一个 <code>addCallAdapterFactory(RxJavaCallAdapterFactory.create())</code>即可；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Network</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Retrofit retrofit;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ZhihuApi zhihuApi;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ZhihuApi <span class="title">getZhihuApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (zhihuApi == <span class="keyword">null</span>) &#123;</span><br><span class="line">            retrofit = <span class="keyword">new</span> Retrofit.Builder()</span><br><span class="line">                    .baseUrl(<span class="string">"http://news-at.zhihu.com/"</span>)</span><br><span class="line">                    .client(<span class="keyword">new</span> OkHttpClient())</span><br><span class="line">                    .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())</span><br><span class="line">                    .build();</span><br><span class="line">            zhihuApi = retrofit.create(ZhihuApi.class);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> zhihuApi;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>通过<code>Network</code>的<code>getZhuhuApi()</code>方法就能拿到一个<code>ZhihuApi</code>对象。通过他就可以调用不同的接口了。</p>
+<h4 id="获取最新日报列表"><a href="#获取最新日报列表" class="headerlink" title="获取最新日报列表"></a>获取最新日报列表</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">   * </span><br><span class="line">   * 获区日报列表</span><br><span class="line">   * <span class="doctag">@param</span> isRefresh 刷新</span><br><span class="line">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initStories</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> isRefresh)</span> </span>&#123;</span><br><span class="line">      stories = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      Network.getZhihuApi().getLatest()</span><br><span class="line">              .subscribeOn(Schedulers.io())</span><br><span class="line">              .flatMap(<span class="keyword">new</span> Func1&lt;LatestStory, Observable&lt;Stroy&gt;&gt;() &#123;</span><br><span class="line">                  <span class="meta">@Override</span></span><br><span class="line">                  <span class="function"><span class="keyword">public</span> Observable&lt;Stroy&gt; <span class="title">call</span><span class="params">(LatestStory latestStory)</span> </span>&#123;</span><br><span class="line">                      date = latestStory.getDate();</span><br><span class="line">                      <span class="keyword">return</span> Observable.from(latestStory.getStories());</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;)</span><br><span class="line">              .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">              .subscribe(<span class="keyword">new</span> Subscriber&lt;Stroy&gt;() &#123;</span><br><span class="line">                  <span class="meta">@Override</span></span><br><span class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Stroy stroy)</span> </span>&#123;</span><br><span class="line">				<span class="comment">//给每个stroy添加date属性值</span></span><br><span class="line">                      stroy.setDate(date);</span><br><span class="line">                      stories.add(stroy);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="meta">@Override</span></span><br><span class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                      <span class="keyword">if</span> (isRefresh) &#123;</span><br><span class="line">					<span class="comment">//如果是下拉刷新，则更新列表</span></span><br><span class="line">                          adapter.addStories(stories, <span class="keyword">true</span>);</span><br><span class="line">                          swipeRefresh.setRefreshing(<span class="keyword">false</span>);</span><br><span class="line">                          stories = <span class="keyword">null</span>;<span class="comment">//更新ui后重新集合为null</span></span><br><span class="line">                      &#125; <span class="keyword">else</span></span><br><span class="line">					<span class="comment">//否则初始化UI</span></span><br><span class="line">                          initUI();</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="meta">@Override</span></span><br><span class="line">                  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">                      Toast.makeText(mContext, <span class="string">"出错了"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><code>RxJava</code>简化了一步操作，使得代码更加美观了，链式结构，阅读性非常强，来看看下面两句代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subscribeOn(Schedulers.io())</span><br><span class="line">observeOn(AndroidSchedulers.mainThread())</span><br></pre></td></tr></table></figure></p>
+<p><code>subscribeOn(Schedulers.io())</code>表示事件将在<code>Schedulers.io()</code>执行，I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler<br><code>observeOn(AndroidSchedulers.mainThread())</code>表示事件将<code>AndroidSchedulers.mainThread()</code>(UI线程)消费，这是相当的方便的，一行代码就能实现线程的调度。有没一种一键切换的感觉。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">flatMap(<span class="keyword">new</span> Func1&lt;LatestStory, Observable&lt;Stroy&gt;&gt;() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> Observable&lt;Stroy&gt; <span class="title">call</span><span class="params">(LatestStory latestStory)</span> </span>&#123;</span><br><span class="line">      ...</span><br><span class="line">      <span class="keyword">return</span> Observable.from(latestStory.getStories());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><code>flatMap</code>这是一个很有用但非常难理解的变换，返回的是<code>Observable</code>，这个确实不好解释解释这个，在本例中，是将<code>LatestStory</code>最终转换为一个<code>Story</code>。</p>
+<h4 id="获取日报详情"><a href="#获取日报详情" class="headerlink" title="获取日报详情"></a>获取日报详情</h4><p>需要传入一个日报的唯一ID，即可得到日报详细内容，返回的<code>json</code>中，<code>body</code>字段是<code>HTML</code>格式的详细内容。所以这里用的是<code>WebView</code>展示内容。这也是我遇到肯定地方，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Network.getZhihuApi().getContent(id)</span><br><span class="line">               .subscribeOn(Schedulers.io())</span><br><span class="line">               .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">               .map(<span class="keyword">new</span> Func1&lt;Content, String&gt;() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">(Content content)</span> </span>&#123;</span><br><span class="line">                       share_url = content.getShare_url();</span><br><span class="line">                       title = content.getTitle();</span><br><span class="line">                       setTitleImg(content.getImage());</span><br><span class="line">                       <span class="keyword">return</span> structHtml(content.getBody(), content.getCss(), content.getJs());</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;)</span><br><span class="line">               .subscribe(<span class="keyword">new</span> Action1&lt;String&gt;() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">                       webView.loadDataWithBaseURL(<span class="keyword">null</span>, s, <span class="string">"text/html"</span>, <span class="string">"utf-8"</span>, <span class="keyword">null</span>);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;, <span class="keyword">new</span> Action1&lt;Throwable&gt;() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Throwable throwable)</span> </span>&#123;</span><br><span class="line">                       Toast.makeText(mContent, <span class="string">"出错了"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br></pre></td></tr></table></figure></p>
+<h5 id="第一坑"><a href="#第一坑" class="headerlink" title="第一坑"></a>第一坑</h5><p>看看<code>webview</code>的方法。如果上面的代码这样写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.loadData(s,<span class="string">"text/html"</span>,<span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>结果将会是这样的</p>
+<p><img src="http://i.imgur.com/qH9ixgS.png" alt="乱码"><br>wtf，明明指定utf-8,还是乱码了。</p>
+<h5 id="第二坑"><a href="#第二坑" class="headerlink" title="第二坑"></a>第二坑</h5><p>现在来看一下这个方法,拼凑了一个完整html文本。好，运行一下看看。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">structHtml</span><span class="params">(String htmlBody, List&lt;String&gt; cssList, List&lt;String&gt; jsList)</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">       StringBuilder htmlString = <span class="keyword">new</span> StringBuilder(<span class="string">"&lt;html&gt;&lt;head&gt;"</span>);</span><br><span class="line">       htmlString.append(<span class="string">"&lt;/head&gt;&lt;body&gt;"</span>);</span><br><span class="line">       htmlString.append(htmlBody);</span><br><span class="line">       htmlString.append(<span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line">       <span class="keyword">return</span> htmlString.toString();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://i.imgur.com/fF9aChT.png" alt="无css"><br>现在没有乱码了，但是你看看是不是排版有点奇怪？是的，这是由于没有加<code>CSS</code>造成的。返回的<code>json</code>中，给了我们<code>CSS</code>的链接，只要在拼凑<code>html</code>的时候加进去就可以了。这样写：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">structHtml</span><span class="params">(String htmlBody, List&lt;String&gt; cssList, List&lt;String&gt; jsList)</span> </span>&#123;</span><br><span class="line">       StringBuilder htmlString = <span class="keyword">new</span> StringBuilder(<span class="string">"&lt;html&gt;&lt;head&gt;"</span>);</span><br><span class="line">       <span class="keyword">for</span> (String css : cssList) &#123;</span><br><span class="line">           htmlString.append(setCssLink(css));</span><br><span class="line">       &#125;</span><br><span class="line">       htmlString.append(<span class="string">"&lt;/head&gt;&lt;body&gt;"</span>);</span><br><span class="line">       htmlString.append(htmlBody);</span><br><span class="line">       htmlString.append(<span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line">       <span class="keyword">return</span> htmlString.toString();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">setCssLink</span><span class="params">(String css)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">"&lt;link rel=\"stylesheet\" href=\""</span> + css + <span class="string">"\"&gt;"</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>跑起来再看看。<br><img src="http://i.imgur.com/R1eGoAq.png" alt="空白"></p>
+<h5 id="第三坑"><a href="#第三坑" class="headerlink" title="第三坑"></a>第三坑</h5><p>文字终于有样式了，等等，上面怎么有一片空白呢？这里其实是图片和标题用的，用过知乎日报的应该都知道吧，就不贴图了。看了一下html代码，发现空白处是一个<code>&lt;Div&gt;</code>造成的，因为的title图片是放在最上面的`ImageView，所以我的处理是将那段代码删掉了。。。最终，我是这样写的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">structHtml</span><span class="params">(String htmlBody, List&lt;String&gt; cssList, List&lt;String&gt; jsList)</span> </span>&#123;</span><br><span class="line">       String deleteDiv = <span class="string">"&lt;div class=\"img-place-holder\"&gt;&lt;/div&gt;"</span>;</span><br><span class="line">       htmlBody = htmlBody.replace(deleteDiv, <span class="string">""</span>);</span><br><span class="line">       StringBuilder htmlString = <span class="keyword">new</span> StringBuilder(<span class="string">"&lt;html&gt;&lt;head&gt;"</span>);</span><br><span class="line">       <span class="keyword">for</span> (String css : cssList) &#123;</span><br><span class="line">           htmlString.append(setCssLink(css));</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">for</span> (String js : jsList) &#123;</span><br><span class="line">           htmlString.append(setJsLink(js));</span><br><span class="line">       &#125;</span><br><span class="line">       htmlString.append(<span class="string">"&lt;/head&gt;&lt;body&gt;"</span>);</span><br><span class="line">       htmlString.append(htmlBody);</span><br><span class="line">       htmlString.append(<span class="string">"&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line">       <span class="keyword">return</span> htmlString.toString();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>终于正常了！！！</p>
+<h4 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h4><p>这个小Demo只是对<code>Rxjava</code>和<code>Retrofit</code>的一个小实践，代码写的并不好，以后慢慢修吧。<br>源码托管在<code>Github</code>上<a href="https://github.com/hunao0221/XDaily" target="_blank" rel="external">https://github.com/hunao0221/XDaily</a></p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://gank.io/post/560e15be2dca930e00da1083#toc_14" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.png" alt="胡闹 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="胡闹 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag">#android</a>
+          
+            <a href="/tags/rxjava/" rel="tag">#rxjava</a>
+          
+            <a href="/tags/retrofit/" rel="tag">#retrofit</a>
+          
+            <a href="/tags/知乎日报/" rel="tag">#知乎日报</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/02/Android自学之路/" rel="next" title="Android自学之路">
+                <i class="fa fa-chevron-left"></i> Android自学之路
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/"
+           data-title="RxJava+Retrofit版知乎日报首页以及遇到的一些坑" data-url="http://hunao.info/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/header.jpg"
+               alt="胡闹" />
+          <p class="site-author-name" itemprop="name">胡闹</p>
+          <p class="site-description motion-element" itemprop="description">本无意与众不同，怎奈何品味出众</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hunao0221" target="_blank" rel="external nofollow">GitHub</a>
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://plus.google.com/u/0/+%E8%83%A1%E9%97%B9" target="_blank" rel="external nofollow">Google</a>
+                  
+                    <i class="fa fa-fw fa-google-plus"></i>
+                  
+                  Google
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#API"><span class="nav-number">1.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dependencies"><span class="nav-number">2.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retrofit"><span class="nav-number">3.</span> <span class="nav-text">Retrofit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取最新日报列表"><span class="nav-number">4.</span> <span class="nav-text">获取最新日报列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取日报详情"><span class="nav-number">5.</span> <span class="nav-text">获取日报详情</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一坑"><span class="nav-number">5.1.</span> <span class="nav-text">第一坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二坑"><span class="nav-number">5.2.</span> <span class="nav-text">第二坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三坑"><span class="nav-number">5.3.</span> <span class="nav-text">第三坑</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结束"><span class="nav-number">6.</span> <span class="nav-text">结束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡闹</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">本站访客数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv">本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hunao0221"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("3DOmRajzHaMKzpEYODRsOYYb-gzGzoHsz", "9nSXQ1t0YRLp5ML2QT7YB0hp");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
