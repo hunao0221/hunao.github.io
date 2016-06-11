@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="胡闹-android-自学" />
+  <meta name="keywords" content="android,教程,正方,okhttp," />
 
 
 
@@ -84,15 +84,37 @@
 
 
 
-<meta name="description" content="本无意与众不同，怎奈何品味出众">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一个人胡闹的日子">
-<meta property="og:url" content="http://hunao.info/index.html">
+<meta name="description" content="一个大学没有自己的移动客户端，不能忍！查成绩，课表考试都要打开网页，不能忍！超级课程表丑陋的UI不能忍！广告不能忍！那么既然这么多不能忍，那不如我们自己开发一个，当然，指望正方给你提供API那是不可能的了，所以，就只有爬网页了。
+######用到的工具：  
+
+chrome (用开发者工具抓包)
+Jsoup (解析html)
+okhttputils (网络访问，张鸿洋大神的开源框架)关于 Jsou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造正方管理系统Android客户端（一）">
+<meta property="og:url" content="http://hunao.info/2016/06/11/打造正方管理系统Android客户端（一）/index.html">
 <meta property="og:site_name" content="一个人胡闹的日子">
-<meta property="og:description" content="本无意与众不同，怎奈何品味出众">
+<meta property="og:description" content="一个大学没有自己的移动客户端，不能忍！查成绩，课表考试都要打开网页，不能忍！超级课程表丑陋的UI不能忍！广告不能忍！那么既然这么多不能忍，那不如我们自己开发一个，当然，指望正方给你提供API那是不可能的了，所以，就只有爬网页了。
+######用到的工具：  
+
+chrome (用开发者工具抓包)
+Jsoup (解析html)
+okhttputils (网络访问，张鸿洋大神的开源框架)关于 Jsou">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-03dd33495e5f865a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-c855bd35e59a8b51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-8c482f145a9650d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-0550d1c8ecfae4e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-31139682f5f5bd1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-06-11T00:06:29.114Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个人胡闹的日子">
-<meta name="twitter:description" content="本无意与众不同，怎奈何品味出众">
+<meta name="twitter:title" content="打造正方管理系统Android客户端（一）">
+<meta name="twitter:description" content="一个大学没有自己的移动客户端，不能忍！查成绩，课表考试都要打开网页，不能忍！超级课程表丑陋的UI不能忍！广告不能忍！那么既然这么多不能忍，那不如我们自己开发一个，当然，指望正方给你提供API那是不可能的了，所以，就只有爬网页了。
+######用到的工具：  
+
+chrome (用开发者工具抓包)
+Jsoup (解析html)
+okhttputils (网络访问，张鸿洋大神的开源框架)关于 Jsou">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2029141-03dd33495e5f865a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -110,7 +132,7 @@
   };
 </script>
 
-  <title> 胡闹-android-自学 - 一个人胡闹的日子 - 本无意与众不同，怎奈何品味出众 </title>
+  <title> 打造正方管理系统Android客户端（一） | 一个人胡闹的日子 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -140,9 +162,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -229,9 +249,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -251,10 +271,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/06/11/打造正方管理系统Android客户端（一）/" itemprop="url">
-                  打造正方管理系统Android客户端（一）
-                </a>
+                打造正方管理系统Android客户端（一）
               
             
           </h1>
@@ -329,9 +346,7 @@
       
 
       
-        
-          
-            <p>一个大学没有自己的移动客户端，不能忍！查成绩，课表考试都要打开网页，不能忍！超级课程表丑陋的UI不能忍！广告不能忍！<br>那么既然这么多不能忍，那不如我们自己开发一个，当然，指望正方给你提供API那是不可能的了，所以，就只有爬网页了。</p>
+        <p>一个大学没有自己的移动客户端，不能忍！查成绩，课表考试都要打开网页，不能忍！超级课程表丑陋的UI不能忍！广告不能忍！<br>那么既然这么多不能忍，那不如我们自己开发一个，当然，指望正方给你提供API那是不可能的了，所以，就只有爬网页了。</p>
 <p>######用到的工具：  </p>
 <ul>
 <li>chrome (用开发者工具抓包)</li>
@@ -393,964 +408,126 @@
 <p>我们看一下网页的源代码，是不是包含上面的代码呢，是不是发现了什么，<br>“欢迎您 ：”，“xxx同学”，哈哈，这个就是我们在网页登录成功之后的右上角显示的欢迎信息的源代码。这就说明我们<strong>登录成功</strong>了。<br>当然还有的情况就是验证码错误，密码错误以及用户名不存在，同样我们也可以从源代码看出来， 其实在网页上就是显示了一个<code>alert()</code>的弹窗，里面有提示信息，所以，我们在手机上就很容易判断出事登录成功了，还是登录失败了，然后写上相关的逻辑，我这里就不一一写出来了，交给你吧，其实在上面，我已经给你简单的判断了一下了。<br>好了，上面的就是今天的内容，后面的内容我将介绍大家最关心的考试查询，成绩查询和课表查询</p>
 <p>本教程的Demo我已经托管了Github上；<br>项目地址:<a href="https://github.com/hunao0221/LoginDemo" target="_blank" rel="external">https://github.com/hunao0221/LoginDemo</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.png" alt="胡闹 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="胡闹 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
     </div>
+  </div>
 
-    <div>
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/" itemprop="url">
-                  RxJava+Retrofit版知乎日报首页以及遇到的一些坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-06T20:33:24+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/android/" rel="tag">#android</a>
           
-
+            <a href="/tags/教程/" rel="tag">#教程</a>
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+            <a href="/tags/正方/" rel="tag">#正方</a>
           
-
-          
-
-          
-          
-             <span id="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/" class="leancloud_visitors" data-flag-title="RxJava+Retrofit版知乎日报首页以及遇到的一些坑">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
+            <a href="/tags/okhttp/" rel="tag">#okhttp</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>这几天抽时间学习了一下火到不行的两个两个框架<code>RxJava</code>和<code>Retrofit</code>，两个框架一结合，牛逼的不要不要的，真的火得有理由啊；<br>于是乎，山寨了一个阉割版的知乎日报，只实现了知乎日报首页。<br><img src="http://i.imgur.com/b2pn3hy.png" alt="截图"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/06/RxJava-Retrofit版知乎日报首页以及遇到的一些坑/" rel="next" title="RxJava+Retrofit版知乎日报首页以及遇到的一些坑">
+                <i class="fa fa-chevron-left"></i> RxJava+Retrofit版知乎日报首页以及遇到的一些坑
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/02/Android自学之路/" itemprop="url">
-                  Android自学之路
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-02T22:09:53+08:00" content="2016-06-02">
-              2016-06-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/02/Android自学之路/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/02/Android自学之路/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/02/Android自学之路/" class="leancloud_visitors" data-flag-title="Android自学之路">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>学android之前，总是非常羡慕会写App的人，感觉真是太牛逼了；后来在我刚上大二的时候，老乡群的学长，他开发了咱们学校的android客户端，可以查成绩，课表吧，虽然现在我都忘记了它长啥样了，但是我仍然记得我当时崇拜的心情，想着什么时候我也能想他们一样开发自己的App呢。  </p>
-<p>记得以前看见过这样一句话 <strong>“程序猿都是野生的！”</strong>,也许是受了这句话的影响，走上了自学的道路。<br>自学的道路还是很艰辛的。系统学安卓之前，我有一点Java基础，也看了一点点android相关。大概是2015年年底，我意识到，再不学点知识，大学就要废了，以后就要喝西北风了。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/02/Android自学之路/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/01/Hexo-Seo优化让你的博客在google搜索排名第一/" itemprop="url">
-                  Hexo Seo优化让你的博客在google搜索排名第一
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-01T09:33:01+08:00" content="2016-06-01">
-              2016-06-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/01/Hexo-Seo优化让你的博客在google搜索排名第一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/01/Hexo-Seo优化让你的博客在google搜索排名第一/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/01/Hexo-Seo优化让你的博客在google搜索排名第一/" class="leancloud_visitors" data-flag-title="Hexo Seo优化让你的博客在google搜索排名第一">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>刚刚建买了域名建了博客，发现在google，百度毛都搜不到，真是悲伤，后来才知道原来是要seo的，所以看了一些文章，然后自己也摸索了一下，终于在让自己的博客在google搜索排名第一了!!!上图！<br><img src="http://i.imgur.com/eA6Jesb.png" alt="google搜索排名"><br>哈哈，顿时觉得自己好厉害耶!<br>下面给大家分享一些我的经验。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/01/Hexo-Seo优化让你的博客在google搜索排名第一/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/教你30块轻松搞定一年的vps和shadowsocks/" itemprop="url">
-                  教你30块轻松搞定一年的vps和shadowsocks
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T20:10:07+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/30/教你30块轻松搞定一年的vps和shadowsocks/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/教你30块轻松搞定一年的vps和shadowsocks/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/30/教你30块轻松搞定一年的vps和shadowsocks/" class="leancloud_visitors" data-flag-title="教你30块轻松搞定一年的vps和shadowsocks">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>作为一名程序员不会fq真是有点说不过去，更何况我还是一名google粉呢。我大概高一的时候开始翻墙，到现在用过非常多的工具，上了不少提供vpn的网站，不过最终还是给shadowsocks给征服了，又因为前几天朋友推荐了我一家vps，所以自己搭建了梯子，然后分享一下搭建心得。<br>先上一张图片，大家看看速度。<br><img src="http://i.imgur.com/NiJPRph.png" alt="速度"><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/30/教你30块轻松搞定一年的vps和shadowsocks/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/关于博客的那些事儿/" itemprop="url">
-                  关于博客的那些事儿
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T18:48:41+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/30/关于博客的那些事儿/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/关于博客的那些事儿/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/30/关于博客的那些事儿/" class="leancloud_visitors" data-flag-title="关于博客的那些事儿">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>终于终于搞定Hexo和Next了，即将开启我的博客之旅，先来说说我和博客的那些事。</p>
-<h5 id="初识博客-–新浪博客"><a href="#初识博客-–新浪博客" class="headerlink" title="初识博客 –新浪博客"></a>初识博客 –新浪博客</h5><p>最开始听说博客这个玩意的时候大概是初一，07，08年这样吧，当时不知道是谁给我说了<strong>韩寒</strong>这个人，后来在百度上看了他的各种介绍，最终知道了<a href="http://blog.sina.com.cn/">新浪博客</a>，然后一阵摸索，搞定了注册，各种设置:背景图片，主题，背景音乐…（强迫症），我记得就关注了韩寒和徐静蕾吧，毕竟那个年代，
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/30/关于博客的那些事儿/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/RecyclerView多布局及点击事件/" itemprop="url">
-                  RecyclerView多布局及点击事件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T10:09:23+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/30/RecyclerView多布局及点击事件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/RecyclerView多布局及点击事件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/30/RecyclerView多布局及点击事件/" class="leancloud_visitors" data-flag-title="RecyclerView多布局及点击事件">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>RecyclerView真的是太强大太强大的，没听过这个view 的可以自行google一下；<br>本文将介绍RecyclerView的多布局；</p>
-<h2 id="多布局的实现"><a href="#多布局的实现" class="headerlink" title="多布局的实现"></a>多布局的实现</h2><h4 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h4><p>多布局是指一个不同的item用不同的layout显示。<br>我们的主页面里面就放RecyclerView<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">android.support.v7.widget.RecyclerView</span></span><br><span class="line">      <span class="attr">android:id</span>=<span class="string">"@+id/recylerview"</span></span><br><span class="line">      <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">      <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/30/RecyclerView多布局及点击事件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/29/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-29T11:22:23+08:00" content="2016-05-29">
-              2016-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/29/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/29/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/29/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/11/打造正方管理系统Android客户端（一）/"
+           data-title="打造正方管理系统Android客户端（一）" data-url="http://hunao.info/2016/06/11/打造正方管理系统Android客户端（一）/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -1370,8 +547,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/header.jpg"
@@ -1441,6 +627,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1560,6 +757,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
