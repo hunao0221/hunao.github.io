@@ -1,0 +1,854 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="胡闹-android-自学" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？&amp;lt;!- more -&amp;gt;
+首先需要添加Jsoup依赖 
+
+compile ‘o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造正方管理系统Android客户端（二）">
+<meta property="og:url" content="http://hunao.info/2016/06/19/打造正方管理系统Android客户端（二）/index.html">
+<meta property="og:site_name" content="一个人胡闹的日子">
+<meta property="og:description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？&amp;lt;!- more -&amp;gt;
+首先需要添加Jsoup依赖 
+
+compile ‘o">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-4ef17a4765a16150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-8cd729bcca08289f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-983ec887e495d91c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-3101276fdc33d352.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-06-19T13:12:35.822Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造正方管理系统Android客户端（二）">
+<meta name="twitter:description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？&amp;lt;!- more -&amp;gt;
+首先需要添加Jsoup依赖 
+
+compile ‘o">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2029141-4ef17a4765a16150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6290114238165812000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 打造正方管理系统Android客户端（二） | 一个人胡闹的日子 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-78475281-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">一个人胡闹的日子</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">湖泊无水,门前有圩</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                打造正方管理系统Android客户端（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-19T21:09:25+08:00" content="2016-06-19">
+              2016-06-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/19/打造正方管理系统Android客户端（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/19/打造正方管理系统Android客户端（二）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/19/打造正方管理系统Android客户端（二）/" class="leancloud_visitors" data-flag-title="打造正方管理系统Android客户端（二）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；<br>以及用<code>Jsoup</code>解析html网页。<br>有人问为什么不用原生的<code>Okhttp</code>或者<code>Retrofit</code>，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？<br>&lt;!- more -&gt;</p>
+<p>首先需要添加<code>Jsoup</code>依赖 </p>
+<blockquote>
+<p>compile ‘org.jsoup:jsoup:1.9.1’</p>
+</blockquote>
+<p>然后我们开始吧</p>
+<p>######抓包查看请求数据<br>首先进入成绩查询页面，可以看到想要查成绩，需要选择学年，学期，以及查询方式，我们先试着查询一下成绩，并用chrome开发者工具抓包。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2029141-4ef17a4765a16150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成绩查询页面"><br>通过抓包可以得到请求的表单信息；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2029141-8cd729bcca08289f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="表单"><br>其中前面两个不用管，直接复制就可以，这里要注意的，查询方式不一样，第一个值是不一样的，所以一定要区别开来，查询方式指的是：按学期查询，按学年查询…还有就是<code>txtQSCJ</code>,<code>txtZZCJ</code>这两个值也是不变的，可能不同的学校这个值也不一样。<code>ddlXN</code>这个是学年，<code>ddlXQ</code>学期，看最后一个<code>Button1</code>,这个值是什么呢？直接复制就好！哈哈。</p>
+<p>######获得参数<br>不过这里我们还有一个步骤需要做；先看看<code>Request Url</code></p>
+<blockquote>
+<p><a href="http://210.44.159.4/xscj.aspxxh=201311011011&amp;xm=%BA%FA%BA%E9%D4%B4&amp;gnmkdm=N121605" target="_blank" rel="external">http://210.44.159.4/xscj.aspxxh=201311011011&amp;xm=%BA%FA%BA%E9%D4%B4&amp;gnmkdm=N121605</a></p>
+</blockquote>
+<p>我们可以看到url里面包含<code>xh</code>学号，还有<code>xm</code>,其中姓名是中文姓名url编码，所以，这个url我们是需要拼接出来的。怎么对中文进行url编码呢，这个就简单了，有java api帮助我们；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encoding</span><span class="params">(String text)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          text = URLEncoder.encode(text, <span class="string">"UTF-8"</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> text;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样，我们需要的就都有了。那就开始查询吧；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> PostFormBuilder post = OkHttpUtils.post();</span><br><span class="line"></span><br><span class="line">      post.url(cjcxUrl)</span><br><span class="line">              .addHeader(<span class="string">"Host"</span>, <span class="string">"210.44.159.4"</span>)</span><br><span class="line">              .addHeader(<span class="string">"Referer"</span>, cjcxUrl)</span><br><span class="line">              .addParams(<span class="string">"__VIEWSTATE"</span>, VIEWSTATE)</span><br><span class="line">              .addParams(<span class="string">"__VIEWSTATEGENERATOR"</span>, <span class="string">"8963BEEC"</span>)</span><br><span class="line">              .addParams(<span class="string">"ddlXN"</span>, ddlXN)</span><br><span class="line">              .addParams(<span class="string">"ddlXQ"</span>, ddlXQ)</span><br><span class="line">              .addParams(<span class="string">"txtQSCJ"</span>, <span class="string">"0"</span>)</span><br><span class="line">              .addParams(<span class="string">"txtZZCJ"</span>, <span class="string">"100"</span>)</span><br><span class="line">              .addParams(<span class="string">"Button1"</span>, <span class="string">"%B0%B4%D1%A7%C6%DA%B2%E9%D1%AF"</span>)</span><br><span class="line">              .build().execute(<span class="keyword">new</span> StringCallback() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Call call, Exception e)</span> </span>&#123;</span><br><span class="line">              Toast.makeText(mContext, <span class="string">"查询失败"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(String response)</span> </span>&#123;</span><br><span class="line">             <span class="comment">//查询成功</span></span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>查询成功之后呢，我们获得了这个页面的源代码</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2029141-983ec887e495d91c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成绩"></p>
+<p>#######解析成绩<br>想要解析html网页得到成绩数据，就需要<code>Jsoup</code>的帮助了。<br>我们现在电脑上看一下它的源代码是什么样的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2029141-3101276fdc33d352.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="成绩表格"><br>我们可以看到，所有的成绩，都放在一个id为<code>DataGrid1</code>的表格中的<code>&lt;tbody&gt;</code>标签中，并且每一个<code>&lt;tr&gt;</code>里面都包含着一个课程的信息，每个信息又都在<code>&lt;td&gt;</code>中，这样我们的思路就屡清楚了；就可以使用<code>Jsoup</code>来帮助我们解析了。关于<code>Jsoup</code>的使用可以参考这篇文章，<a href="http://blog.csdn.net/zzq900503/article/details/10071307" target="_blank" rel="external"><a href="http://blog.csdn.net/sbsujjbcy/article/details/44853967" target="_blank" rel="external">Jsoup库使用完全解析</a></a>，本文不做研究。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;ScoreBean&gt; <span class="title">parseScore</span><span class="params">(String reponse)</span> </span>&#123;</span><br><span class="line">      List&lt;ScoreBean&gt; scoreList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      Document document = Jsoup.parse(response);</span><br><span class="line">      Element dataGrid1 = document.getElementById(<span class="string">"DataGrid1"</span>);</span><br><span class="line">      Elements trs = dataGrid1.select(<span class="string">"tbody"</span>).select(<span class="string">"tr"</span>);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; trs.size(); i++) &#123;</span><br><span class="line">          ScoreBean bean = <span class="keyword">new</span> ScoreBean();</span><br><span class="line">          Elements tds = trs.get(i).select(<span class="string">"td"</span>);</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; tds.size(); j++) &#123;</span><br><span class="line">              <span class="keyword">switch</span> (j) &#123;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                      bean.setCourseId(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                      bean.setCourseName(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                      bean.setCourseXz(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                      bean.setCourseCj(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                      bean.setCourseGs(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                      bean.setCourseBk(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">                      bean.setCourseCx(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">                      bean.setCourseXf(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">                      bean.setCourseBj(tds.get(j).text());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">           scoreList.add(bean);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span>  scoreList;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>ScoreBean</code>可以根据你的需要选择需要的属性，我这里贴一份完整的；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScoreBean</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String courseId;</span><br><span class="line">    <span class="keyword">private</span> String courseName;</span><br><span class="line">    <span class="keyword">private</span> String courseXz;</span><br><span class="line">    <span class="keyword">private</span> String courseCj;</span><br><span class="line">    <span class="keyword">private</span> String courseGs;</span><br><span class="line">    <span class="keyword">private</span> String courseBk;</span><br><span class="line">    <span class="keyword">private</span> String courseCx;</span><br><span class="line">    <span class="keyword">private</span> String courseXf;</span><br><span class="line">    <span class="keyword">private</span> String courseBj;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseBj</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseBj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseBj</span><span class="params">(String courseBj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseBj = courseBj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseBk</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseBk;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseBk</span><span class="params">(String courseBk)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseBk = courseBk;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseCj</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseCj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseCj</span><span class="params">(String courseCj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseCj = courseCj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseCx</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseCx;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseCx</span><span class="params">(String courseCx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseCx = courseCx;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseGs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseGs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseGs</span><span class="params">(String courseGs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseGs = courseGs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseId</span><span class="params">(String courseId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseId = courseId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseName</span><span class="params">(String courseName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseName = courseName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseXf</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseXf;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseXf</span><span class="params">(String courseXf)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseXf = courseXf;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCourseXz</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> courseXz;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCourseXz</span><span class="params">(String courseXz)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.courseXz = courseXz;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样我们的所有成绩信息就都保存在了List中了，然后就可以利用<code>ListView</code>或者<code>RecylerView</code>展示在页面上了；<br><strong>交给你吧</strong>！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.png" alt="胡闹 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="胡闹 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/11/打造正方管理系统Android客户端（一）/" rel="next" title="打造正方管理系统Android客户端（一）">
+                <i class="fa fa-chevron-left"></i> 打造正方管理系统Android客户端（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/19/打造正方管理系统Android客户端（二）/"
+           data-title="打造正方管理系统Android客户端（二）" data-url="http://hunao.info/2016/06/19/打造正方管理系统Android客户端（二）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/header.jpg"
+               alt="胡闹" />
+          <p class="site-author-name" itemprop="name">胡闹</p>
+          <p class="site-description motion-element" itemprop="description">本无意与众不同，怎奈何品味出众</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hunao0221" target="_blank" rel="external nofollow">GitHub</a>
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://plus.google.com/u/0/+%E8%83%A1%E9%97%B9" target="_blank" rel="external nofollow">Google</a>
+                  
+                    <i class="fa fa-fw fa-google-plus"></i>
+                  
+                  Google
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡闹</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">本站访客数<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv">本站总访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hunao0221"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("3DOmRajzHaMKzpEYODRsOYYb-gzGzoHsz", "9nSXQ1t0YRLp5ML2QT7YB0hp");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
