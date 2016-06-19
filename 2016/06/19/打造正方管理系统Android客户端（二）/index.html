@@ -84,29 +84,20 @@
 
 
 
-<meta name="description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？&amp;lt;!- more -&amp;gt;
-首先需要添加Jsoup依赖 
-
-compile ‘o">
+<meta name="description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="打造正方管理系统Android客户端（二）">
 <meta property="og:url" content="http://hunao.info/2016/06/19/打造正方管理系统Android客户端（二）/index.html">
 <meta property="og:site_name" content="一个人胡闹的日子">
-<meta property="og:description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？&amp;lt;!- more -&amp;gt;
-首先需要添加Jsoup依赖 
-
-compile ‘o">
+<meta property="og:description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-4ef17a4765a16150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-8cd729bcca08289f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-983ec887e495d91c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2029141-3101276fdc33d352.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-06-19T13:13:40.583Z">
+<meta property="og:updated_time" content="2016-06-19T13:15:06.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="打造正方管理系统Android客户端（二）">
-<meta name="twitter:description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？&amp;lt;!- more -&amp;gt;
-首先需要添加Jsoup依赖 
-
-compile ‘o">
+<meta name="twitter:description" content="前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；以及用Jsoup解析html网页。有人问为什么不用原生的Okhttp或者Retrofit，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2029141-4ef17a4765a16150.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -339,7 +330,7 @@ compile ‘o">
       
 
       
-        <p>前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；<br>以及用<code>Jsoup</code>解析html网页。<br>有人问为什么不用原生的<code>Okhttp</code>或者<code>Retrofit</code>，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？<br>&lt;!- more -&gt;</p>
+        <p>前一篇教程中，我们学习了如何在手机上请求登录正方管理系统，那么我们登录成功之后，就可以执行其他的操作了。本文给大家介绍的是如何查询成绩；<br>以及用<code>Jsoup</code>解析html网页。<br>有人问为什么不用原生的<code>Okhttp</code>或者<code>Retrofit</code>，因为我觉得做这个东西的都是小白，刚学安卓不就，先用用简单封装好的框架也未尝不可，是吧？<br><a id="more"></a></p>
 <p>首先需要添加<code>Jsoup</code>依赖 </p>
 <blockquote>
 <p>compile ‘org.jsoup:jsoup:1.9.1’</p>
